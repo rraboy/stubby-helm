@@ -2,7 +2,7 @@
 image:
   repository: rraboy/stubby-helm
   pullPolicy: IfNotPresent
-  tag: ""
+  tag: "latest"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -23,7 +23,7 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  port: 80
+  port: 53
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious

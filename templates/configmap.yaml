@@ -9,4 +9,4 @@ data:
     listen_addresses:
       - 0.0.0.0@53
 
-    {{- toYaml .Values.stubby_extra_yml | nindent 4 }}
+    {{- .Values.stubby_extra_yml | nindent 4 }}

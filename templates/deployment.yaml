@@ -5,9 +5,7 @@ metadata:
   labels:
     {{- include "stubby-helm.labels" . | nindent 4 }}
 spec:
-  {{- if not .Values.autoscaling.enabled }}
   replicas: 1
-  {{- end }}
   selector:
     matchLabels:
       {{- include "stubby-helm.selectorLabels" . | nindent 6 }}
@@ -24,22 +22,21 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "stubby-helm.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: udp
               containerPort: {{ .Values.service.port }}
-              protocol: udp
+              protocol: UDP
             - name: tcp
               containerPort: {{ .Values.service.port }}
-              protocol: tcp
+              protocol: TCP
           livenessProbe:
             tcpSocket:
               port: tcp
