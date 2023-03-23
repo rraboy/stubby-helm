@@ -8,7 +8,7 @@ on:
       - 'docker/**'
 
 jobs:
-  docker:
+  helm-package-publish:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -29,10 +29,10 @@ jobs:
         uses: 'google-github-actions/upload-cloud-storage@v1'
         with:
           path: 'stubby-helm-0.1.0.tgz'
-          destination: 'github-rraboy-stubby-helm/stubby-helm-0.1.0.tgz'
+          destination: 'github-rraboy-stubby-helm/'
           
       - id: 'upload-index-yaml'
         uses: 'google-github-actions/upload-cloud-storage@v1'
         with:
           path: 'index.yaml'
-          destination: 'github-rraboy-stubby-helm/index.yaml'
+          destination: 'github-rraboy-stubby-helm/'
